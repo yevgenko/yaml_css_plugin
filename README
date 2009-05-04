@@ -1,0 +1,87 @@
+yamlCss plugin
+==============
+
+The `yamlCssPlugin` is a symfony plugin to wrap the [YAML CSS Framework][1] for
+use in your application.
+
+It also gives you the formatter and base forms to let you produce the 
+[Form Construction Kit][3] compatible forms on top of symfony forms.
+
+Installation
+------------
+
+  * Install the plugin
+
+        $ symfony plugin:install yamlCssPlugin
+
+  * Clear your cache
+
+        $ symfony cc
+
+Usage
+-----
+
+### Create main layout as described in [YAML Documentation][2]
+
+The path to YAML core files might looks different depend on where your 
+main layout is. For example, *web/layout/main.css* will looks like:
+
+    [css]
+    @charset "UTF-8";
+
+    /* import core styles | Basis-Stylesheets einbinden */
+    @import url(../yamlCssPlugin/core/base.css);
+
+    /* import screen layout | Screen-Layout einbinden */
+    @import url(../yamlCssPlugin/screen/forms.css);
+    @import url(screen/basemod.css);
+    @import url(screen/content.css);
+    @import url(screen/forms.css);
+    /* import print layout | Druck-Layout einbinden */
+    /* @import url(../yamlCssPlugin/print/print_003_draft.css); */
+
+### Inside view
+
+    [php]
+    <form action="#" method="post" class="yform">
+      <fieldset>
+        <legend>Contact Details</legend>
+        <?php echo $form;?>
+      </fieldset>
+      <div class="type-button">
+        <input type="reset" value="Reset" id="reset" name="reset" />
+        <input type="submit" value="Send" id="submit" name="submit" />
+      </div>
+    </form>
+
+### Single form class
+
+    [php]
+    // lib/form/ContactForm.class.php
+    class ContactForm extends YamlForm
+    {
+      public function configure()
+      {
+        //...
+      }
+    }
+
+### Propel integration
+
+    [php]
+    // lib/form/BaseFormPropel.class.php
+    abstract class BaseFormPropel extends YamlFormPropel
+    {
+      public function setup()
+      {
+      }
+    }
+
+References
+----------
+  * [Layout examples](http://www.yaml.de/fileadmin/examples/index.html "Layout Examples")
+  * [YAML-based form styling](http://www.yaml.de/fileadmin/examples/01_layouts_basics/building_forms.html "Form Example")
+
+[1]: http://www.yaml.de/en/home.html  "YAML CSS Framework"
+[2]: http://www.yaml.de/en/documentation.html  "YAML Documentation"
+[3]: http://www.yaml.de/en/documentation/css-components/form-construction-kit.html "The Form Construction Kit"
