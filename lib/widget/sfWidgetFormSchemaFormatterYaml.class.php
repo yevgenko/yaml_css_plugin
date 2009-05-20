@@ -84,7 +84,7 @@ class sfWidgetFormSchemaFormatterYaml extends sfWidgetFormSchemaFormatter
     switch (yamlCssHtml::getTagName($field))
     {
       case 'select':
-        $type = $tag;
+        $type = 'select';
       break;
 
       case 'input':
